@@ -39,9 +39,10 @@ export const SignUp = () => {
       .then((userData) => {
         const token = userData.token;
         localStorage.setItem('authToken', token);
+
         if (!avatar || avatar.length === 0) {
           reset();
-          navigate('/login');
+          navigate('/home');
         } else {
           new Compressor(avatar[0], {
             quality: 0.6,

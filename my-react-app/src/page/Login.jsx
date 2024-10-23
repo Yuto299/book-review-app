@@ -12,13 +12,13 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (date) => {
+  const onSubmit = (data) => {
     fetch('https://railway.bookreview.techtrain.dev/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(date),
+      body: JSON.stringify(data),
     })
       .then((response) => {
         if (!response.ok) {
@@ -28,8 +28,9 @@ const Login = () => {
         }
         return response.json();
       })
-      .then(() => {
-        navigate('/Home');
+      .then((data) => {
+        localStorage.setItem('authToken', data.token);
+        navigate('/home');
       })
       .catch((error) => {
         setErrorMessage(error.message || 'ログイン中にエラーが発生しました');

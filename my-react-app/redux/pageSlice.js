@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
+  currentPage: 0,
 };
 
 export const pageSlice = createSlice({
@@ -9,11 +9,11 @@ export const pageSlice = createSlice({
   initialState,
   reducers: {
     nextPage: (state) => {
-      state.value += 1;
+      state.currentPage += 1;
     },
     prevPage: (state) => {
-      if (state.value > 0) {
-        state.value -= 1;
+      if (state.currentPage > 0) {
+        state.currentPage -= 1;
       }
     },
   },
