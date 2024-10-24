@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 function ProfileEdit() {
   const [userName, setUserName] = useState('');
@@ -53,6 +54,7 @@ function ProfileEdit() {
 
   return (
     <div className='container mx-auto p-4'>
+      <Header />
       <h1 className='text-2xl font-bold mb-4'>ユーザー名編集</h1>
       <form className='space-y-4'>
         <div>

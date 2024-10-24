@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 function NewBookReview() {
   const [title, setTitle] = useState('');
@@ -50,6 +51,7 @@ function NewBookReview() {
 
   return (
     <div className='container mx-auto p-4'>
+      <Header />
       <h1 className='text-3xl font-bold mb-6'>新規書籍レビュー投稿</h1>
       <form onSubmit={handleSubmit} className='space-y-4'>
         <div>
