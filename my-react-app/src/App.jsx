@@ -5,6 +5,7 @@ import Home from './page/Home';
 import BookList from './page/BookList';
 import Pagination from './page/Pagination';
 import ProfileEdit from './page/ProfileEdit';
+import NewBookReview from './page/NewBookReview';
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem('authToken');
@@ -18,7 +19,8 @@ const App = () => {
         <Route path='/home' element={isAuthenticated ? <Home /> : <Navigate to='/login' />} />
         <Route path='/booklist' element={isAuthenticated ? <BookList /> : <Navigate to='/login' />} />
         <Route path='/pagination' element={isAuthenticated ? <Pagination /> : <Navigate to='/login' />} />
-        <Route path='/profileedit' element={isAuthenticated ? <ProfileEdit /> : <Navigate to='/login' />} />
+        <Route path='/profile' element={isAuthenticated ? <ProfileEdit /> : <Navigate to='/login' />} />
+        <Route path='/new' element={isAuthenticated ? <NewBookReview /> : <Navigate to='/login' />} />
       </Routes>
     </Router>
   );

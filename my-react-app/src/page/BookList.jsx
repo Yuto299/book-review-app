@@ -47,10 +47,16 @@ function BookList({ currentPage }) {
           <div className='flex items-center'>
             <p className='mr-4'>ようこそ, {userName}さん</p>
             <button
-              onClick={() => navigate('/profileedit')}
+              onClick={() => navigate('/profile')}
               className='bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors mr-2'
             >
               プロフィール編集
+            </button>
+            <button
+              onClick={() => navigate('/new')}
+              className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors mr-2'
+            >
+              新規レビュー投稿
             </button>
             <button
               onClick={handleLogout}
@@ -74,7 +80,6 @@ function BookList({ currentPage }) {
             key={book.id}
             className='border border-gray-300 rounded-lg p-4 mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300'
           >
-            <p>ID: {book.id}</p>
             <p>Title: {book.title}</p>
             <p>
               URL:{' '}
@@ -84,7 +89,6 @@ function BookList({ currentPage }) {
             </p>
             <p>Detail: {book.detail}</p>
             <p>Review: {book.review}</p>
-            <p>Reviewer: {book.reviewer}</p>
           </div>
         ))
       ) : (
