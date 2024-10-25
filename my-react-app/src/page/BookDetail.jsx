@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Header from './Header';
 
 function BookDetail() {
@@ -7,9 +8,10 @@ function BookDetail() {
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [cookies] = useCookies(['authToken']);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
 
     if (!token) {
       alert('ログインが必要です');
@@ -30,7 +32,7 @@ function BookDetail() {
         console.error('Error fetching book data:', error);
         setLoading(false);
       });
-  }, [id, navigate]);
+  }, [id, navigate, cookies]);
 
   if (loading) {
     return <p className='text-center text-gray-500'>Loading...</p>;
@@ -44,6 +46,7 @@ function BookDetail() {
     <div className='container mx-auto p-4'>
       <Header />
       <h1 className='text-3xl font-bold mb-4'>{book.title}</h1>
+      <p>ID: {book.id}</p>
       <p>
         URL:{' '}
         <a href={book.url} className='text-blue-500 underline'>
@@ -53,6 +56,14 @@ function BookDetail() {
       <p>Detail: {book.detail}</p>
       <p>Review: {book.review}</p>
       <p>Reviewer: {book.reviewer}</p>
+      {book.isMine && (
+        <button
+          onClick={() => navigate(`/edit/${book.id}`)}
+          className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors mt-4'
+        >
+          編集する
+        </button>
+      )}
       <button
         onClick={() => navigate('/home')}
         className='bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors mt-4'

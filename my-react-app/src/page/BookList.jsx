@@ -1,24 +1,36 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Header from './Header';
 
 // eslint-disable-next-line react/prop-types
 function BookList({ currentPage }) {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
+  const [cookies] = useCookies(['authToken']);
   const offset = currentPage * 10;
 
   useEffect(() => {
-    fetch(`https://railway.bookreview.techtrain.dev/public/books?offset=${offset}`)
+    const token = cookies.authToken;
+
+    if (!token) {
+      alert('ログインが必要です');
+      return;
+    }
+    fetch(`https://railway.bookreview.techtrain.dev/books?offset=${offset}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setBooks(data);
       })
       .catch((error) => console.error('Error fetching data:', error));
-  }, [currentPage, offset]);
+  }, [cookies, currentPage, offset]);
 
   const handleBookClick = (bookId) => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
 
     if (!token) {
       alert('ログインが必要です');

@@ -8,7 +8,12 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 cd を指定するときは必ず下記の場所に移動してください！！！
-$ cd "C:/Users/Ota Yuto/Desktop/book-review-app"
+cd my-react-app
+npm run dev
 
 html ショートカットキー
 html:5 + Tab または Enter
+
+localStorage に token を保存する作業は Login.jsx で setItem しているよ！！
+
+'Content-Type': 'application/json'は put,delete,post,patch のときに必要

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Header from './Header';
 
 function NewBookReview() {
@@ -7,18 +8,21 @@ function NewBookReview() {
   const [url, setUrl] = useState('');
   const [detail, setDetail] = useState('');
   const [review, setReview] = useState('');
+  const [cookies] = useCookies(['authToken']);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
     if (!token) {
       alert('ログインが必要です');
       navigate('/login');
     }
-  }, [navigate]);
+  }, [cookies, navigate]);
 
-  const handleSubmit = () => {
-    const token = localStorage.getItem('authToken');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const token = cookies.authToken;
 
     if (token) {
       fetch('https://railway.bookreview.techtrain.dev/books', {

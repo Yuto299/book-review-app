@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function Header() {
   const [userName, setUserName] = useState(null);
+  const [cookies, , removeCookie] = useCookies(['authToken']);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
 
     if (token) {
       fetch('https://railway.bookreview.techtrain.dev/users', {
@@ -22,10 +24,10 @@ function Header() {
           console.error('Error fetching user data:', error);
         });
     }
-  }, []);
+  }, [cookies]);
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    removeCookie('authToken', { path: '/' });
     setUserName(null);
   };
 

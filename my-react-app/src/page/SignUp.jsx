@@ -2,10 +2,12 @@ import { useState } from 'react';
 import Compressor from 'compressorjs';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
+  const [, setCookie] = useCookies(['authToken']);
   const {
     register,
     handleSubmit,
@@ -37,8 +39,8 @@ export const SignUp = () => {
         return userResponse.json();
       })
       .then((userData) => {
-        const token = userData.token;
-        localStorage.setItem('authToken', token);
+        const token = userData.token; //写真のところでtokenを使用するから
+        setCookie('authToken', token, { path: '/' });
 
         if (!avatar || avatar.length === 0) {
           reset();

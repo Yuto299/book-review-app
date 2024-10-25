@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Header from './Header';
 
 function ProfileEdit() {
   const [userName, setUserName] = useState('');
+  const [cookies] = useCookies(['authToken']);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
 
     if (token) {
       fetch('https://railway.bookreview.techtrain.dev/users', {
@@ -25,10 +27,10 @@ function ProfileEdit() {
     } else {
       navigate('/home');
     }
-  }, [navigate]);
+  }, [cookies, navigate]);
 
   const handleUpdate = () => {
-    const token = localStorage.getItem('authToken');
+    const token = cookies.authToken;
 
     if (token) {
       fetch('https://railway.bookreview.techtrain.dev/users', {

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
+  const [, setCookie] = useCookies(['authToken']);
 
   const {
     register,
@@ -29,7 +31,7 @@ const Login = () => {
         return response.json();
       })
       .then((data) => {
-        localStorage.setItem('authToken', data.token);
+        setCookie('authToken', data.token, { path: '/' });
         navigate('/home');
       })
       .catch((error) => {
