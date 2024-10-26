@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet';
 import Header from './Header';
 
 function EditBook() {
@@ -93,62 +94,68 @@ function EditBook() {
   }
 
   return (
-    <div className='container mx-auto p-4'>
-      <Header />
-      <h1 className='text-3xl font-bold mb-4'>書籍情報を編集する</h1>
+    <>
+      <Helmet>
+        <title>レビューを編集</title>
+        <meta name='description' content='本のレビューを編集するページです。' />
+      </Helmet>
+      <div className='container mx-auto p-4'>
+        <Header />
+        <h1 className='text-3xl font-bold mb-4'>書籍情報を編集する</h1>
 
-      <label className='block'>
-        Title:
-        <input
-          type='text'
-          value={book.title}
-          onChange={(e) => setBook({ ...book, title: e.target.value })}
-          className='border border-gray-300 p-2 w-full mb-4'
-        />
-      </label>
+        <label className='block'>
+          Title:
+          <input
+            type='text'
+            value={book.title}
+            onChange={(e) => setBook({ ...book, title: e.target.value })}
+            className='border border-gray-300 p-2 w-full mb-4'
+          />
+        </label>
 
-      <label className='block'>
-        URL:
-        <input
-          type='text'
-          value={book.url}
-          onChange={(e) => setBook({ ...book, url: e.target.value })}
-          className='border border-gray-300 p-2 w-full mb-4'
-        />
-      </label>
+        <label className='block'>
+          URL:
+          <input
+            type='text'
+            value={book.url}
+            onChange={(e) => setBook({ ...book, url: e.target.value })}
+            className='border border-gray-300 p-2 w-full mb-4'
+          />
+        </label>
 
-      <label className='block'>
-        Detail:
-        <textarea
-          value={book.detail}
-          onChange={(e) => setBook({ ...book, detail: e.target.value })}
-          className='border border-gray-300 p-2 w-full mb-4'
-        />
-      </label>
+        <label className='block'>
+          Detail:
+          <textarea
+            value={book.detail}
+            onChange={(e) => setBook({ ...book, detail: e.target.value })}
+            className='border border-gray-300 p-2 w-full mb-4'
+          />
+        </label>
 
-      <label className='block'>
-        Review:
-        <textarea
-          value={book.review}
-          onChange={(e) => setBook({ ...book, review: e.target.value })}
-          className='border border-gray-300 p-2 w-full mb-4'
-        />
-      </label>
+        <label className='block'>
+          Review:
+          <textarea
+            value={book.review}
+            onChange={(e) => setBook({ ...book, review: e.target.value })}
+            className='border border-gray-300 p-2 w-full mb-4'
+          />
+        </label>
 
-      <button
-        onClick={handleUpdate}
-        className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors'
-      >
-        更新する
-      </button>
+        <button
+          onClick={handleUpdate}
+          className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors'
+        >
+          更新する
+        </button>
 
-      <button
-        onClick={handleDelete}
-        className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-colors ml-4'
-      >
-        削除する
-      </button>
-    </div>
+        <button
+          onClick={handleDelete}
+          className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-colors ml-4'
+        >
+          削除する
+        </button>
+      </div>
+    </>
   );
 }
 

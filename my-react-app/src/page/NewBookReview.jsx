@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet';
 import Header from './Header';
 
 function NewBookReview() {
@@ -54,56 +55,62 @@ function NewBookReview() {
   };
 
   return (
-    <div className='container mx-auto p-4'>
-      <Header />
-      <h1 className='text-3xl font-bold mb-6'>新規書籍レビュー投稿</h1>
-      <form onSubmit={handleSubmit} className='space-y-4'>
-        <div>
-          <label className='block text-gray-700'>タイトル</label>
-          <input
-            type='text'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded'
-            required
-          />
-        </div>
-        <div>
-          <label className='block text-gray-700'>URL</label>
-          <input
-            type='url'
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded'
-            required
-          />
-        </div>
-        <div>
-          <label className='block text-gray-700'>詳細</label>
-          <textarea
-            value={detail}
-            onChange={(e) => setDetail(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded'
-            required
-          />
-        </div>
-        <div>
-          <label className='block text-gray-700'>レビュー</label>
-          <textarea
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded'
-            required
-          />
-        </div>
-        <button
-          type='submit'
-          className='bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors'
-        >
-          投稿する
-        </button>
-      </form>
-    </div>
+    <>
+      <Helmet>
+        <title>新しいレビューを投稿</title>
+        <meta name='description' content='新しいレビューを投稿するページです。' />
+      </Helmet>
+      <div className='container mx-auto p-4'>
+        <Header />
+        <h1 className='text-3xl font-bold mb-6'>新規書籍レビュー投稿</h1>
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          <div>
+            <label className='block text-gray-700'>タイトル</label>
+            <input
+              type='text'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className='w-full p-2 border border-gray-300 rounded'
+              required
+            />
+          </div>
+          <div>
+            <label className='block text-gray-700'>URL</label>
+            <input
+              type='url'
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className='w-full p-2 border border-gray-300 rounded'
+              required
+            />
+          </div>
+          <div>
+            <label className='block text-gray-700'>詳細</label>
+            <textarea
+              value={detail}
+              onChange={(e) => setDetail(e.target.value)}
+              className='w-full p-2 border border-gray-300 rounded'
+              required
+            />
+          </div>
+          <div>
+            <label className='block text-gray-700'>レビュー</label>
+            <textarea
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              className='w-full p-2 border border-gray-300 rounded'
+              required
+            />
+          </div>
+          <button
+            type='submit'
+            className='bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors'
+          >
+            投稿する
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
 
